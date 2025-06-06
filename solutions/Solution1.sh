@@ -1,35 +1,40 @@
 #!/bin/bash
 
-# Navigate to results directory
-echo " Navigate to results/ directory..."
+#Navigate to the data directory
+echo "Navigating to data/ directory..."
+cd ../Problems/Problem1/data || { echo "data/ directory not found!"; exit 1; }
+
+#List files to confirm dataset exists
+echo "Listing files in data/:"
+ls
+
+#Inspect the file content (show first 5 lines)
+echo "Displaying first 5 lines of cosmic_flux_data.txt:"
+head -n 5 cosmic_flux_data.txt
+
+#Go back to parent directory
+echo "Returning to parent directory..."
+cd ..
+
+#Create results/ directory if it does not exist
+echo "Creating results/ directory..."
+mkdir -p results
+
+#Copy dataset to results/
+echo "Copying dataset to results/ folder..."
+cp data/cosmic_flux_data.txt results/
+
+#Move into results/ and rename the file
 cd results || { echo "results/ directory not found!"; exit 1; }
+echo "Renaming cosmic_flux_data.txt to cosmic_flux_backup.txt..."
+mv cosmic_flux_data.txt cosmic_flux_backup.txt
 
-# Display number of unique particle types
-echo "Counting unique particle types..."
-unique_particles=$(tail -n +2 cosmic_flux_backup.txt | cut -f3 | sort | uniq | wc -l)
-echo "There are $unique_particles unique particle types."
+#Count the lines including header
+echo "Counting lines in cosmic_flux_backup.txt:"
+wc -l cosmic_flux_backup.txt
 
-# List the top 5 highest-energy events
-echo "Top 5 highest-energy events:"
-echo "(Energy(GeV), Flux, Particle)"
-tail -n +2 cosmic_flux_backup.txt | sort -k1,1nr | head -n 5
-
-# Extract flux values for protons and compute average
-echo "Calculating average flux for protons..."
-avg_flux=$(awk '$3=="Proton" {sum+=$2; count++} END {if(count>0) print sum/count; else print 0}' cosmic_flux_backup.txt)
-echo "Average flux for protons: $avg_flux"
-
-# Create a new file with only electrons entries
-echo "Creating file electrons_only.txt..."
-
-# Copy header
-head -n 1 cosmic_flux_backup.txt > electrons_only.txt
-
-# Append electron entries
-awk '$3=="Electron"' cosmic_flux_backup.txt >> electrons_only.txt
-
-echo "All tasks complete. File electrons_only.txt created in results/."
-
-# Return to repo root
+#Return to repo root (assuming started from repo root)
+echo "Returning to repo root directory..."
 cd ../..
 
+echo "Assignment 1 tasks complete."

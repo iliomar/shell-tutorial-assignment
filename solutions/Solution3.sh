@@ -3,7 +3,7 @@
 echo "Starting log analysis..."
 
 # Find all .log files
-log_files=$(find simulation_logs/ -type f -name "*.log")
+log_files=$(find ../Problems/Problem3/simulation_logs/ -type f -name "*.log")
 
 if [[ -z "$log_files" ]]; then
   echo "No log files found in simulation_logs/."

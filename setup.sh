@@ -1,28 +1,37 @@
 #!/bin/bash
 
+echo "Setting up your shell-tutorial-assignment environment..."
+
+# Create required directories
+mkdir -p data
+mkdir -p problems
+mkdir -p solutions
+mkdir -p results
+mkdir -p simulation_logs  # For Problem 3
+
+# Create sample cosmic ray CSV for Problem 1
+cat <<EOF > data/cosmic_rays.csv
+particle_type,energy_GeV,flux
+proton,10,150
+electron,5,80
+proton,20,210
+muon,15,40
+electron,12,100
+EOF
+
+# Create sample simulation log files for Problem 3
+for i in {1..3}; do
+  cat <<EOF > simulation_logs/run_${i}.log
+INFO: Simulation started for run ${i}
+WARNING: Minor issue detected in run ${i}
+ERROR: Something went wrong in run ${i}
+INFO: Simulation completed for run ${i}
+EOF
+done
+
+echo "Directories and sample data created!"
+echo "Created: data/, problems/, solutions/, results/, simulation_logs/"
+echo "Sample files: data/cosmic_rays.csv and 3 simulation_logs/run_*.log files"
+echo "You're ready to start working on the assignments! "
+
 echo "Setting up the environment for Shell Tutorial Assignment..."
-
-# Check for bash
-if ! command -v bash &> /dev/null; then
-    echo "Error: bash is not installed. Please install bash before continuing."
-    exit 1
-fi
-
-# Make all solution scripts executable
-chmod +x solutions/*.sh
-
-# Create results directory if needed
-if [ ! -d "results" ]; then
-    mkdir results
-fi
-
-echo "Setup complete!"
-
-echo ""
-echo "To run an assignment solution, use:"
-echo "  ./solutions/solution1.sh"
-echo "  ./solutions/solution2.sh"
-echo "  ./solutions/solution3.sh"
-echo ""
-echo "Feel free to edit and run the scripts with your own parameters."
-

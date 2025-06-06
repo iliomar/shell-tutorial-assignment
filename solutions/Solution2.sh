@@ -2,7 +2,7 @@
 
 # Navigate to results directory
 echo "Navigate to results/ directory..."
-cd results || { echo "results/ directory not found!"; exit 1; }
+cd ../Problems/Problem2/results || { echo "results/ directory not found!"; exit 1; }
 
 # Find number of unique particle types
 echo "Counting unique particle types..."
@@ -15,7 +15,7 @@ echo "(Energy(GeV), Flux, Particle)"
 tail -n +2 cosmic_flux_backup.txt | sort -k1,1nr | head -n 5
 
 # Calculate average flux for each particle type using a loop
-echo "Step 4: Calculating average flux per particle type..."
+echo "Calculating average flux per particle type..."
 particles=$(tail -n +2 cosmic_flux_backup.txt | cut -f3 | sort | uniq)
 
 for particle in $particles; do
