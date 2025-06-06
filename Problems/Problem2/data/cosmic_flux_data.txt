@@ -1,0 +1,11 @@
+Energy(GeV)	Flux(particles/m²/s/sr/GeV)	Particle
+10.0	1.2e-3	proton
+50.0	3.4e-4	electron
+100.0	2.1e-5	helium
+75.0	6.3e-4	proton
+200.0	7.2e-6	electron
+150.0	3.1e-5	proton
+80.0	5.4e-4	electron
+500.0	9.8e-7	proton
+20.0	1.1e-3	electron
+120.0	1.8e-5	proton
